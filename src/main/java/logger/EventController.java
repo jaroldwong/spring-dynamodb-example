@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EventController {
@@ -27,13 +26,21 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
-    @RequestMapping("/event/{id}")
-    public Optional<Event> getEvent(@PathVariable String id) {
-        return eventService.getEventById(id);
+    @RequestMapping(value = "/events/{logEntityId}", method = RequestMethod.GET)
+    public List<Event> getEventsByLogEntityId(@PathVariable String logEntityId) {
+        return eventService.getEventsByLogEntityId(logEntityId);
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     public void addEvent(@RequestBody Event event) {
+        // {
+        //     id: generated,
+        //     logEntityId: "application_asdf",
+        //     entry: {
+        //         loggedAt: "",
+        //         message: "",
+        //     }
+        // }
         eventService.addEvent(event);
     }
 

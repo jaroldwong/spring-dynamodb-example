@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EventService {
@@ -21,8 +20,8 @@ public class EventService {
         return events;
     }
 
-    public Optional<Event> getEventById(String id) {
-        return eventRepository.findById(id);
+    public List<Event> getEventsByLogEntityId(String logEntityId) {
+        return eventRepository.findByLogEntityId(logEntityId);
     }
 
     public void addEvent(Event event) {
